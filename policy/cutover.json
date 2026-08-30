@@ -1,0 +1,16 @@
+{
+  "version": "1.0",
+  "default": "deny",
+  "auto_execute": false,
+  "required_gates": [
+    "application-owner-confirmed",
+    "dependency-graph-validated",
+    "landing-zone-ready",
+    "network-path-tested",
+    "identity-dns-tested",
+    "transaction-replay-pass",
+    "recovery-objectives-pass",
+    "rollback-tested",
+    "change-approval"
+  ]
+}

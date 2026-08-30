@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MigrationForge normalized cloud migration estate",
+  "type": "object",
+  "required": ["scenario", "estate_summary", "workload_groups", "dependencies", "economics"],
+  "properties": {
+    "scenario": {"type": "string"},
+    "estate_summary": {
+      "type": "object",
+      "required": ["virtual_machines", "applications"],
+      "properties": {
+        "virtual_machines": {"type": "integer", "minimum": 1},
+        "applications": {"type": "integer", "minimum": 1}
+      }
+    },
+    "workload_groups": {"type": "array", "minItems": 1},
+    "dependencies": {"type": "array"},
+    "economics": {"type": "object"}
+  }
+}

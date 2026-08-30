@@ -1,0 +1,44 @@
+{
+  "scenario": "Agentic VMware-to-Azure migration assessment for 250 VMs and 40 applications",
+  "estate_summary": {
+    "virtual_machines": 250,
+    "applications": 40,
+    "data_centers": 2,
+    "business_units": 3,
+    "source": "synthetic VMware estate"
+  },
+  "workload_groups": [
+    {"name": "customer-portals", "application_count": 5, "vm_count": 32, "business_value": "high", "modernization_value": "high", "container_ready": true, "code_change_required": false, "retire_candidate": false, "saas_replacement": false, "unsupported_os": false, "latency_to_factory_ms": 4, "max_latency_ms": 20},
+    {"name": "order-processing", "application_count": 4, "vm_count": 38, "business_value": "high", "modernization_value": "high", "container_ready": false, "code_change_required": true, "retire_candidate": false, "saas_replacement": false, "unsupported_os": false, "latency_to_factory_ms": 6, "max_latency_ms": 15},
+    {"name": "erp-estate", "application_count": 8, "vm_count": 64, "business_value": "high", "modernization_value": "medium", "container_ready": false, "code_change_required": false, "retire_candidate": false, "saas_replacement": false, "unsupported_os": false, "latency_to_factory_ms": 9, "max_latency_ms": 20},
+    {"name": "shared-services", "application_count": 10, "vm_count": 58, "business_value": "medium", "modernization_value": "medium", "container_ready": false, "code_change_required": false, "retire_candidate": false, "saas_replacement": false, "unsupported_os": false, "latency_to_factory_ms": 5, "max_latency_ms": 20},
+    {"name": "manufacturing-control", "application_count": 1, "vm_count": 16, "business_value": "high", "modernization_value": "low", "container_ready": false, "code_change_required": false, "retire_candidate": false, "saas_replacement": false, "unsupported_os": false, "latency_to_factory_ms": 35, "max_latency_ms": 5},
+    {"name": "legacy-archive", "application_count": 2, "vm_count": 8, "business_value": "low", "modernization_value": "low", "container_ready": false, "code_change_required": false, "retire_candidate": true, "saas_replacement": false, "unsupported_os": true, "latency_to_factory_ms": 2, "max_latency_ms": 50},
+    {"name": "collaboration-tools", "application_count": 2, "vm_count": 10, "business_value": "medium", "modernization_value": "low", "container_ready": false, "code_change_required": false, "retire_candidate": false, "saas_replacement": true, "unsupported_os": false, "latency_to_factory_ms": 4, "max_latency_ms": 30},
+    {"name": "regional-apps", "application_count": 8, "vm_count": 24, "business_value": "medium", "modernization_value": "medium", "container_ready": false, "code_change_required": false, "retire_candidate": false, "saas_replacement": false, "unsupported_os": false, "latency_to_factory_ms": 8, "max_latency_ms": 25}
+  ],
+  "dependencies": [
+    {"dependency": "landing-zone", "workload": "identity-dns"},
+    {"dependency": "landing-zone", "workload": "network-connectivity"},
+    {"dependency": "identity-dns", "workload": "shared-services"},
+    {"dependency": "network-connectivity", "workload": "shared-services"},
+    {"dependency": "shared-services", "workload": "erp-estate"},
+    {"dependency": "shared-services", "workload": "customer-portals"},
+    {"dependency": "erp-estate", "workload": "order-processing"},
+    {"dependency": "customer-portals", "workload": "order-processing"}
+  ],
+  "economics": {
+    "current_monthly_cost_usd": 180000,
+    "target_monthly_cost_usd": 130000,
+    "migration_investment_usd": 600000,
+    "dual_run_days": 45,
+    "outage_cost_per_hour_usd": 25000,
+    "baseline_cutover_hours": 8,
+    "validated_cutover_hours": 2
+  },
+  "search_evidence": [
+    "cloud migration", "Azure migration", "VMware to Azure", "application modernization", "Azure Migrate",
+    "Azure landing zone", "data center migration", "hybrid cloud", "multi-cloud", "Kubernetes migration",
+    "Terraform", "Azure Bicep", "cloud cost optimization", "FinOps", "dependency mapping", "migration wave planning"
+  ]
+}

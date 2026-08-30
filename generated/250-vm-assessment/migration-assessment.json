@@ -1,0 +1,220 @@
+{
+  "schema_version": "migrationforge/v1",
+  "scenario": "Agentic VMware-to-Azure migration assessment for 250 VMs and 40 applications",
+  "evidence_level": "synthetic-estate",
+  "estate_summary": {
+    "virtual_machines": 250,
+    "applications": 40,
+    "data_centers": 2,
+    "business_units": 3,
+    "source": "synthetic VMware estate"
+  },
+  "strategy_portfolio": {
+    "refactor": 4,
+    "rehost": 26,
+    "replatform": 5,
+    "repurchase": 2,
+    "retain": 1,
+    "retire": 2
+  },
+  "decisions": [
+    {
+      "group": "customer-portals",
+      "application_count": 5,
+      "vm_count": 32,
+      "strategy": "replatform",
+      "status": "eligible",
+      "reasons": [
+        "container-ready with high modernization value"
+      ],
+      "target": "Azure Kubernetes Service"
+    },
+    {
+      "group": "order-processing",
+      "application_count": 4,
+      "vm_count": 38,
+      "strategy": "refactor",
+      "status": "eligible",
+      "reasons": [
+        "high-value workload requires architectural change"
+      ],
+      "target": "Azure application landing zone"
+    },
+    {
+      "group": "erp-estate",
+      "application_count": 8,
+      "vm_count": 64,
+      "strategy": "rehost",
+      "status": "eligible",
+      "reasons": [
+        "deadline favors low-change relocation"
+      ],
+      "target": "Azure virtual machines"
+    },
+    {
+      "group": "shared-services",
+      "application_count": 10,
+      "vm_count": 58,
+      "strategy": "rehost",
+      "status": "eligible",
+      "reasons": [
+        "deadline favors low-change relocation"
+      ],
+      "target": "Azure virtual machines"
+    },
+    {
+      "group": "manufacturing-control",
+      "application_count": 1,
+      "vm_count": 16,
+      "strategy": "retain",
+      "status": "blocked",
+      "reasons": [
+        "measured dependency latency exceeds workload SLO"
+      ],
+      "target": "on-premises with hybrid connectivity"
+    },
+    {
+      "group": "legacy-archive",
+      "application_count": 2,
+      "vm_count": 8,
+      "strategy": "retire",
+      "status": "blocked",
+      "reasons": [
+        "no active business transactions",
+        "unsupported operating system requires remediation before migration"
+      ],
+      "target": "decommission with evidence retention"
+    },
+    {
+      "group": "collaboration-tools",
+      "application_count": 2,
+      "vm_count": 10,
+      "strategy": "repurchase",
+      "status": "eligible",
+      "reasons": [
+        "approved SaaS replacement exists"
+      ],
+      "target": "SaaS integration landing zone"
+    },
+    {
+      "group": "regional-apps",
+      "application_count": 8,
+      "vm_count": 24,
+      "strategy": "rehost",
+      "status": "eligible",
+      "reasons": [
+        "deadline favors low-change relocation"
+      ],
+      "target": "Azure virtual machines"
+    }
+  ],
+  "migration_waves": [
+    {
+      "wave": 0,
+      "workloads": [
+        "landing-zone"
+      ],
+      "required_validation": [
+        "synthetic transactions",
+        "network paths",
+        "identity",
+        "rollback"
+      ]
+    },
+    {
+      "wave": 1,
+      "workloads": [
+        "identity-dns",
+        "network-connectivity"
+      ],
+      "required_validation": [
+        "synthetic transactions",
+        "network paths",
+        "identity",
+        "rollback"
+      ]
+    },
+    {
+      "wave": 2,
+      "workloads": [
+        "shared-services"
+      ],
+      "required_validation": [
+        "synthetic transactions",
+        "network paths",
+        "identity",
+        "rollback"
+      ]
+    },
+    {
+      "wave": 3,
+      "workloads": [
+        "customer-portals",
+        "erp-estate"
+      ],
+      "required_validation": [
+        "synthetic transactions",
+        "network paths",
+        "identity",
+        "rollback"
+      ]
+    },
+    {
+      "wave": 4,
+      "workloads": [
+        "order-processing"
+      ],
+      "required_validation": [
+        "synthetic transactions",
+        "network paths",
+        "identity",
+        "rollback"
+      ]
+    }
+  ],
+  "economics": {
+    "current_monthly_cost_usd": 180000,
+    "target_monthly_cost_usd": 130000,
+    "modeled_monthly_difference_usd": 50000,
+    "migration_investment_usd": 600000,
+    "dual_run_cost_usd": 270000.0,
+    "simple_payback_months": 12.0,
+    "modeled_outage_exposure_reduction_usd": 150000
+  },
+  "readiness": "blocked",
+  "production_control": {
+    "auto_execute": false,
+    "required_gates": [
+      "owner confirmation",
+      "dependency validation",
+      "transaction replay",
+      "rollback test",
+      "change approval"
+    ]
+  },
+  "claim_boundary": [
+    "No live VMware, Azure, AWS, GCP or Kubernetes inventory was accessed",
+    "No workload was migrated and no production cutover was performed",
+    "Costs and outage values are configurable synthetic inputs",
+    "Recommendations require customer evidence and accountable-owner approval"
+  ],
+  "search_evidence": [
+    "cloud migration",
+    "Azure migration",
+    "VMware to Azure",
+    "application modernization",
+    "Azure Migrate",
+    "Azure landing zone",
+    "data center migration",
+    "hybrid cloud",
+    "multi-cloud",
+    "Kubernetes migration",
+    "Terraform",
+    "Azure Bicep",
+    "cloud cost optimization",
+    "FinOps",
+    "dependency mapping",
+    "migration wave planning"
+  ],
+  "receipt_sha256": "099f9e64abb80a39987052870b7213cadee25f9f6962c56ab1ffa932710f23d8"
+}

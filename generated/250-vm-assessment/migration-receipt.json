@@ -1,0 +1,7 @@
+{
+  "schema_version": "migrationforge/v1",
+  "scenario": "Agentic VMware-to-Azure migration assessment for 250 VMs and 40 applications",
+  "evidence_level": "synthetic-estate",
+  "readiness": "blocked",
+  "receipt_sha256": "099f9e64abb80a39987052870b7213cadee25f9f6962c56ab1ffa932710f23d8"
+}
