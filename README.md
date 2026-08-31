@@ -2,11 +2,11 @@
 
 ## VMware to Azure, Azure Migrate, Landing Zones, Kubernetes, Infrastructure as Code and FinOps
 
-**MigrationForge** is an open-source, agent-ready cloud migration assessment and modernization foundation. It converts normalized VMware, on-premises and multi-cloud estate evidence into explainable 7R strategies, dependency-aware migration waves, Azure landing-zone infrastructure, transaction-level validation requirements and a configurable cloud migration business case.
+**MigrationForge** is an open-source cloud migration and application modernization control plane. It converts VMware, on-premises and multi-cloud estate evidence into explainable 7R strategies, dependency-aware waves, Azure landing-zone infrastructure, transaction validation and a configurable business case. Its persistent API then controls the lifecycle from assessment through planning, build, validation, canary, cutover and continuous FinOps optimization.
 
 [![Azure cloud migration assessment CI](https://github.com/AAH20/azure-cloud-migration-modernization-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/AAH20/azure-cloud-migration-modernization-platform/actions/workflows/ci.yml)
 
-> **Claim boundary:** this repository uses a synthetic 250-VM estate. It does not access VMware vCenter, Azure Migrate, AWS, GCP or a customer network and performs no production migration.
+> **Claim boundary:** the included 250-VM estate is synthetic. The control plane, persistence, idempotency and evidence-gated transitions are implemented, but no live vCenter, Azure Migrate, customer network or production cutover is claimed.
 
 ## Why cloud migration is painful, urgent and frequent
 
@@ -46,6 +46,21 @@ The deterministic compiler:
 6. Calculates migration investment, dual-running cost, payback and outage exposure.
 7. Prohibits autonomous production cutover.
 8. Emits a reproducible migration receipt.
+
+## Persistent modernization control plane
+
+```bash
+pip install -e '.[test]'
+migrationforge-api examples/vmware-to-azure/250-vm-estate.json --port 8080
+
+curl -s http://127.0.0.1:8080/v1/runs \
+  -H 'content-type: application/json' \
+  -d '{"workload":"order-processing","idempotency_key":"order-processing-001"}'
+```
+
+Migration runs advance exactly one phase at a time. Every gate stores an artifact SHA-256 and accountable actor. Planning, build, validation, canary, cutover and optimization transitions fail closed when required evidence is absent. Each successful transition emits its own tamper-evident receipt.
+
+See [production acceptance requirements](docs/production-readiness.md). The reference SQLite volume supports a single durable instance; production HA requires the documented managed-PostgreSQL adapter rather than pretending a single-writer database is horizontally scalable.
 
 ## Azure Migrate and dependency mapping
 
@@ -117,7 +132,7 @@ See the [search and ATS evidence map](docs/search-and-ats-evidence.md) and [tran
 - AKS application-modernization assessment
 - Synthetic transaction replay and OpenTelemetry comparison
 - Azure Site Recovery and rollback evidence
-- Managed migration-wave portal
+- Managed migration-wave portal and PostgreSQL HA adapter
 - Post-migration FinOps and continuous modernization
 
 ## Work with A2Z SOC
